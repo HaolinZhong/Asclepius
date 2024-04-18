@@ -1,14 +1,14 @@
 'use client'
 
-import {useState} from "react";
-import {useMessage} from "@/app/ui/dashboard/chat/chat-context";
-import {Button, TextField} from "@mui/material";
+import { useState } from "react";
+import { useMessage } from "@/app/ui/dashboard/chat/chat-context";
+import { Button, TextArea } from '@apideck/components'
 
 export default function MessageForm() {
     const [content, setContent] = useState('')
     const { addMessage, isStreaming } = useMessage();
 
-    const handleSubmit = async (e: any) => {
+    const handleSubmit = async (e) => {
         e?.preventDefault()
         addMessage(content)
         setContent('')
@@ -19,40 +19,23 @@ export default function MessageForm() {
             className="relative mx-auto max-w-3xl rounded-t-xl"
             onSubmit={handleSubmit}
         >
-            <div className=" supports-backdrop-blur:bg-white/95 h-[130px] rounded-t-xl border-t border-l border-r border-gray-200 border-gray-500/10 bg-white p-5 backdrop-blur dark:border-gray-50/[0.06]">
+            <div className="h-[130px] rounded-t-xl border border-gray-300 bg-white p-5 shadow-sm">
                 <label htmlFor="content" className="sr-only">
                     Your message
                 </label>
-                <TextField
+                <TextArea
                     name="content"
                     placeholder="Enter your message here..."
                     rows={3}
                     value={content}
                     autoFocus
-                    className="border-0 !p-3 text-gray-900 shadow-none ring-1 ring-gray-300/40 backdrop-blur focus:outline-none focus:ring-gray-300/80 dark:bg-gray-800/80 dark:text-white dark:placeholder-gray-400 dark:ring-0"
-                    onChange={(e: any) => setContent(e.target.value)}
-                    disabled={isStreaming}
+                    className="w-full border border-gray-300 p-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500"
+                    onChange={(e) => setContent(e.target.value)}
                 />
                 <div className="absolute right-8 bottom-10">
-                    <div className="flex space-x-3">
-                        <Button className={isStreaming && 'disabled'} type="submit" size="small">
-                            Send
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth={1.5}
-                                stroke="currentColor"
-                                className="ml-1 h-4 w-4"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
-                                />
-                            </svg>
-                        </Button>
-                    </div>
+                    <Button className="" type="submit" size="small">
+                        Send
+                    </Button>
                 </div>
             </div>
         </form>

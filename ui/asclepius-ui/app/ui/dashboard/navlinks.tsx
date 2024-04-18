@@ -11,10 +11,10 @@ import Link from "next/link";
 import clsx from "clsx";
 
 const links= [
-    {name: 'Chat', href: 'dashboard/chat', icon: ChatBubbleLeftRightIcon},
-    {name: 'Appointment', href: 'dashboard/appointment', icon: CalendarDaysIcon},
+    {name: 'Chat', href: '/dashboard/chat', icon: ChatBubbleLeftRightIcon},
+    {name: 'Appointment', href: 'appointment', icon: CalendarDaysIcon},
     // {name: 'Messages', href: '/messages', icon: InboxStackIcon},
-    {name: 'Note & Summary', href: 'dashboard/note', icon: ClipboardDocumentCheckIcon}
+    {name: 'Note & Summary', href: 'note', icon: ClipboardDocumentCheckIcon}
 ]
 
 export default function NavLinks() {

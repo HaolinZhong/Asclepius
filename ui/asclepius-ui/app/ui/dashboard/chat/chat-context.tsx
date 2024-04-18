@@ -12,18 +12,16 @@ export interface ContextProps {
 
 export const ChatContext = createContext<Partial<ContextProps>>({});
 
-export function ChatContextProvider({ children }: { children: ReactNode }) {
+export const ChatContextProvider = ({ children }: { children: ReactNode }) => {
     const [messages, setMessages] = useState<ChatMessage[]>([]);
     const [isStreaming, setIsStreaming] = useState<boolean>(false);
 
     const updateResponseMessage = (newContent: string) => {
-        setMessages(currentMessages => {
-            const newMessages = [...currentMessages];
-            if (newMessages.length > 0) {
-                newMessages[length - 1].content = newContent;
-            }
-            return newMessages;
-        });
+        const newMessages: ChatMessage[] = [...messages];
+        if (newMessages.length > 0) {
+            newMessages[length - 1].content = newContent;
+        }
+        setMessages(newMessages);
     }
 
     useEffect(() => {
