@@ -8,5 +8,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SimpleMessage {
-    private String message;
+
+    public static SimpleMessage assistantMessage(String s) {
+        return new SimpleMessage("assistant", "assistant", s);
+    }
+
+    private String role;
+    private String author;
+    private String content;
 }

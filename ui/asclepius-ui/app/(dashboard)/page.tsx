@@ -1,8 +1,10 @@
 
+
+
 export default function DashboardPage() {
     return(
         <main>
-            <p>hello world!</p>
+            <p>Asclepius - Your AI receptionist.</p>
         </main>
     )
 }

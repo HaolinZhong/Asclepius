@@ -3,19 +3,19 @@
 import {
     CalendarDaysIcon,
     ChatBubbleLeftRightIcon,
-    ClipboardDocumentCheckIcon,
-    InboxStackIcon
+    UserGroupIcon
 } from "@heroicons/react/24/outline";
 import {usePathname} from "next/navigation";
 import Link from "next/link";
 import clsx from "clsx";
 
 const links= [
-    {name: 'Chat', href: '/dashboard/chat', icon: ChatBubbleLeftRightIcon},
+    {name: 'Chat', href: 'chat', icon: ChatBubbleLeftRightIcon},
     {name: 'Appointment', href: 'appointment', icon: CalendarDaysIcon},
     // {name: 'Messages', href: '/messages', icon: InboxStackIcon},
-    {name: 'Note & Summary', href: 'note', icon: ClipboardDocumentCheckIcon}
+    {name: 'Physician', href: 'physician', icon: UserGroupIcon}
 ]
+
 
 export default function NavLinks() {
     const pathname = usePathname();

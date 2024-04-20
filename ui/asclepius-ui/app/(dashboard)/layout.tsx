@@ -1,5 +1,6 @@
+import SideNav from "@/app/ui/dashboard/sidenav";
 import type {Metadata} from "next";
-import "./ui/globals.css";
+import "../ui/globals.css";
 import {inter} from "@/app/lib/font";
 
 export const metadata: Metadata = {
@@ -18,15 +19,17 @@ export const metadata: Metadata = {
         : undefined,
 };
 
-
-export default function RootLayout({
-                                       children,
-                                   }: Readonly<{
-    children: React.ReactNode;
-}>) {
+export default function Layout({children}: { children: React.ReactNode }) {
     return (
         <html lang="en">
-            <body className={`${inter.className} antialiased bg-gray-50`}>{children}</body>
+            <body className={`${inter.className} antialiased bg-gray-50`}>
+                <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
+                    <div className="w-full flex-none md:w-64">
+                        <SideNav/>
+                    </div>
+                    <div className="flex-grow p-6 md:overflow-y-auto md:p-12">{children}</div>
+                </div>
+            </body>
         </html>
     );
 }

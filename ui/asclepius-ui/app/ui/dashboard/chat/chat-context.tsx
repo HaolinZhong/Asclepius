@@ -2,7 +2,6 @@
 
 import {createContext, ReactNode, useContext, useEffect, useState} from "react";
 import {ChatMessage, ChatMessageRoleEnum} from "@/app/lib/entity/chat-message";
-import streamingMessage from "@/app/lib/api/chat-api";
 
 export interface ContextProps {
     messages: ChatMessage[]
@@ -12,23 +11,32 @@ export interface ContextProps {
 
 export const ChatContext = createContext<Partial<ContextProps>>({});
 
+const sendMessage = async (message: ChatMessage) => {
+    try {
+        const response = await fetch("/api/chat", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(message)
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export const ChatContextProvider = ({ children }: { children: ReactNode }) => {
     const [messages, setMessages] = useState<ChatMessage[]>([]);
     const [isStreaming, setIsStreaming] = useState<boolean>(false);
-
-    const updateResponseMessage = (newContent: string) => {
-        const newMessages: ChatMessage[] = [...messages];
-        if (newMessages.length > 0) {
-            newMessages[length - 1].content = newContent;
-        }
-        setMessages(newMessages);
-    }
 
     useEffect(() => {
         const initializeChat = () => {
             const welcomeMessage: ChatMessage = {
                 role: ChatMessageRoleEnum.Assistant,
-                content: 'Hi, How can I help you today?',
+                content: `Hi, I'm  Asclepius, your virtual clinic receptionist. Please describe your symptom and I will help you to find 
+                 a suitable physician and make an appointment for you.`,
             }
             setMessages([welcomeMessage])
         }
@@ -47,14 +55,15 @@ export const ChatContextProvider = ({ children }: { children: ReactNode }) => {
                 author: 'user',
                 content: content
             };
+            setMessages([...messages, requestMessage]);
+            const responseContent = await sendMessage(requestMessage)
             const responseMessage: ChatMessage = {
                 role: ChatMessageRoleEnum.Assistant,
-                author: 'assistant',
-                content: ''
-            };
-            setMessages([...messages, requestMessage, responseMessage]);
+                author: ChatMessageRoleEnum.Assistant,
+                content: responseContent
+            }
+            setMessages([...messages, requestMessage, responseMessage])
             setIsStreaming(true);
-            await streamingMessage(requestMessage, updateResponseMessage);
         } catch (error) {
             // addToToast
         } finally {

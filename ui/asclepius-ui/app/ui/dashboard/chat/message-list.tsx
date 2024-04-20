@@ -4,8 +4,7 @@ import {useMessage} from "@/app/ui/dashboard/chat/chat-context";
 import Image from "next/image";
 
 export default function MessageList() {
-    const { messages, isStreaming } = useMessage();
-
+    const { messages, isStreaming } = useMessage()
     return (
         <div className="mx-auto max-w-3xl pt-8">
             {messages?.map((message, i) => {
@@ -22,6 +21,7 @@ export default function MessageList() {
                                 src="/favicon.png"
                                 height={36}
                                 width={36}
+                                className="h-9 w-9 cursor-pointer rounded-full"
                             />
                         )}
                         <div
@@ -35,7 +35,7 @@ export default function MessageList() {
                         </div>
                         {isUser && (
                             <img
-                                src="/profile-image.png"
+                                src="https://www.teamsmart.ai/next-assets/profile-image.png"
                                 className="h-9 w-9 cursor-pointer rounded-full"
                                 alt="avatar"
                             />
