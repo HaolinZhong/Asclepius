@@ -1,101 +1,121 @@
 {
   "physicians": [
     {
+      "id": 1,
       "name": "Dr. Emily Zhang",
       "specialty": "Cardiology",
       "description": "Dr. Emily Zhang is a leading cardiologist with over 15 years of experience. Known for her patient-centered approach, she specializes in heart disease prevention and is fluent in both English and Mandarin."
     },
     {
+      "id": 2,
       "name": "Dr. John Wang",
       "specialty": "Neurology",
       "description": "Dr. John Wang specializes in neurological disorders including epilepsy and Parkinson's disease. He has a PhD from Harvard and is recognized for his innovative treatment methods."
     },
     {
+      "id": 3,
       "name": "Dr. Sophia Lee",
       "specialty": "Dermatology",
       "description": "Dr. Sophia Lee, a board-certified dermatologist, is renowned for her expertise in treating psoriasis and eczema using both traditional and modern therapies."
     },
     {
+      "id": 4,
       "name": "Dr. Michael Kim",
       "specialty": "Pediatrics",
       "description": "With over 20 years of experience, Dr. Michael Kim focuses on developmental disorders in children and is known for his compassionate care."
     },
     {
+      "id": 5,
       "name": "Dr. Laura Smith",
       "specialty": "Orthopedics",
       "description": "Dr. Laura Smith is an orthopedic surgeon with a focus on sports injuries and joint replacement. She is committed to advancing minimally invasive surgical techniques."
     },
     {
+      "id": 6,
       "name": "Dr. Robert Johnson",
       "specialty": "Oncology",
       "description": "Dr. Robert Johnson is an oncologist who specializes in breast and lung cancer treatments. His research in targeted therapy has received international acclaim."
     },
     {
+      "id": 7,
       "name": "Dr. Angela Davis",
       "specialty": "Psychiatry",
       "description": "Dr. Angela Davis offers comprehensive mental health services, focusing on mood disorders and anxiety. Her holistic approach integrates therapy with medication management."
     },
     {
+      "id": 8,
       "name": "Dr. Mohammed Ali",
       "specialty": "Gastroenterology",
       "description": "Specializing in digestive diseases, Dr. Mohammed Ali provides advanced care for conditions like IBS and Crohn's disease, utilizing both medication and dietary management."
     },
     {
+      "id": 9,
       "name": "Dr. Clara Wilson",
       "specialty": "Endocrinology",
       "description": "Dr. Clara Wilson treats hormonal disorders including diabetes and thyroid conditions. Her patient education programs have been particularly praised for their effectiveness."
     },
     {
+      "id": 10,
       "name": "Dr. James Martinez",
       "specialty": "Anesthesiology",
       "description": "Dr. James Martinez is known for his expertise in pain management and anesthesia during complex surgeries. His approach enhances patient comfort and recovery."
     },
     {
+      "id": 11,
       "name": "Dr. Elizabeth Brown",
       "specialty": "Radiology",
       "description": "Dr. Elizabeth Brown uses advanced imaging techniques to diagnose and treat diseases. She has been instrumental in developing new protocols for MRI and CT scans."
     },
     {
+      "id": 12,
       "name": "Dr. Oliver Garcia",
       "specialty": "Rheumatology",
       "description": "Dr. Oliver Garcia specializes in autoimmune diseases such as rheumatoid arthritis. He is known for his personalized treatment plans that improve quality of life for his patients."
     },
     {
+      "id": 13,
       "name": "Dr. Alice Murphy",
       "specialty": "Nephrology",
       "description": "Dr. Alice Murphy focuses on kidney health, particularly chronic kidney disease and dialysis. She is committed to patient education and long-term care management."
     },
     {
+      "id": 14,
       "name": "Dr. Thomas Lee",
       "specialty": "Urology",
       "description": "Dr. Thomas Lee is a urologist specializing in male reproductive health and minimally invasive treatments for urinary disorders."
     },
     {
+      "id": 15,
       "name": "Dr. Sarah Patel",
       "specialty": "Obstetrics and Gynecology",
       "description": "Dr. Sarah Patel is dedicated to women's health, covering all aspects from prenatal care to menopause management. Her patient-first approach has built a loyal patient base."
     },
     {
+      "id": 16,
       "name": "Dr. David White",
       "specialty": "Emergency Medicine",
       "description": "Dr. David White handles acute medical conditions in the emergency department. Known for his quick decision-making and ability to manage high-stress situations."
     },
     {
+      "id": 17,
       "name": "Dr. Jessica Green",
       "specialty": "Ophthalmology",
       "description": "Dr. Jessica Green is an ophthalmologist who specializes in both medical and surgical management of eye diseases, including cataract surgery and glaucoma treatment."
     },
     {
+      "id": 18,
       "name": "Dr. Henry Adams",
       "specialty": "Pulmonology",
       "description": "Dr. Henry Adams deals with respiratory system disorders such as asthma and COPD. His treatments emphasize improved breathing techniques and lifestyle changes."
     },
     {
+      "id": 19,
       "name": "Dr. Julia Miller",
       "specialty": "Pathology",
       "description": "Dr. Julia Miller is a pathologist known for her diagnostic acumen in identifying disease pathologies, particularly in oncologic pathology."
     },
     {
+      "id": 20,
       "name": "Dr. Mark Anderson",
       "specialty": "Infectious Disease",
       "description": "Dr. Mark Anderson focuses on the treatment and management of infectious diseases, including emerging infections and antibiotic resistance."
