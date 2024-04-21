@@ -20,7 +20,7 @@ public class AppointmentController {
     @GetMapping("/appointment")
     public List<AppointmentDto> getAllAppointment() {
         List<Appointment> appointments = AppointmentRepository.getAllAppointment();
-        return appointments.stream().map(
+        return appointments.stream().sorted().map(
                 appointment -> AppointmentDto.builder()
                         .id(appointment.getId())
                         .date(appointment.getDate())

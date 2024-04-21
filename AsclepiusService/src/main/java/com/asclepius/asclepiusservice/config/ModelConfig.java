@@ -16,6 +16,7 @@ import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.model.openai.OpenAiStreamingChatModel;
 import dev.langchain4j.rag.content.retriever.EmbeddingStoreContentRetriever;
 import dev.langchain4j.service.AiServices;
+import dev.langchain4j.store.embedding.EmbeddingStore;
 import dev.langchain4j.store.embedding.EmbeddingStoreIngestor;
 import dev.langchain4j.store.embedding.inmemory.InMemoryEmbeddingStore;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,7 +41,7 @@ public class ModelConfig {
     }
 
     @Bean
-    public Receptionist receptionistModel() throws MalformedURLException {
+    public EmbeddingStore embeddingStore() throws MalformedURLException {
         URL url = new URL(physicianApi);
         Document htmlDocument = UrlDocumentLoader.load(url, new TextDocumentParser());
         HtmlTextExtractor transformer = new HtmlTextExtractor(null, null, true);
@@ -48,23 +49,24 @@ public class ModelConfig {
 
         InMemoryEmbeddingStore<TextSegment> embeddingStore = new InMemoryEmbeddingStore<>();
         EmbeddingStoreIngestor.ingest(document, embeddingStore);
+        return embeddingStore;
+    }
 
-        ChatMemory chatMemory = MessageWindowChatMemory.withMaxMessages(20);
-
+    @Bean
+    public Receptionist receptionistModel(EmbeddingStore embeddingStore) throws MalformedURLException {
         return AiServices.builder(Receptionist.class)
                 .chatLanguageModel(OpenAiChatModel.withApiKey(openAIApiKey))
-                .chatMemory(chatMemory)
+                .chatMemoryProvider(memoryId -> MessageWindowChatMemory.withMaxMessages(20))
                 .contentRetriever(EmbeddingStoreContentRetriever.from(embeddingStore))
                 .tools(new AppointmentManager())
                 .build();
     }
 
     @Bean
-    public ChatContextMonitor chatContextMonitorModel() {
-        ChatMemory chatMemory = MessageWindowChatMemory.withMaxMessages(20);
+    public ChatContextMonitor chatContextMonitorModel(EmbeddingStore embeddingStore) {
         return AiServices.builder(ChatContextMonitor.class)
                 .chatLanguageModel(OpenAiChatModel.withApiKey(openAIApiKey))
-                .chatMemory(chatMemory)
+                .contentRetriever(EmbeddingStoreContentRetriever.from(embeddingStore))
                 .build();
     }
 }

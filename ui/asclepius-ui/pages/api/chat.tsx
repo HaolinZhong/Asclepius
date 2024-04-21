@@ -2,7 +2,7 @@ import {NextApiRequest, NextApiResponse} from "next";
 import axios from "axios";
 
 const apiBlockingInstance = axios.create({
-    baseURL: process.env.host,
+    baseURL: process.env.NEXT_PUBLIC_host,
     timeout: 100000,
     responseType: 'json'
 })

@@ -34,11 +34,12 @@ export const ChatContextProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         const initializeChat = async () => {
             const requestMessage: ChatMessage = {
-                type: 'message',
+                type: 'init',
                 role: ChatMessageRoleEnum.User,
                 author: 'user',
                 content: `This is a new user, so you can forget about the information about the previous user.`
             };
+            setIsStreaming(true);
             await sendMessage(requestMessage);
 
             const welcomeMessage: ChatMessage = {
@@ -49,6 +50,7 @@ export const ChatContextProvider = ({ children }: { children: ReactNode }) => {
                  a suitable physician and make an appointment for you.`,
             }
             setMessages([welcomeMessage])
+            setIsStreaming(false);
         }
 
         // When no messages are present, we initialize the chat the system message and the welcome message

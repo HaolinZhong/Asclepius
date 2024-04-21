@@ -1,12 +1,7 @@
 'use client'
 
 import {Card} from "@/app/ui/dashboard/physician/card";
-
-const fetchPhysician = async () => {
-    const response = await fetch('http://localhost:3000/api/physician')
-    const physicians = await response.json()
-    return physicians;
-}
+import {fetchPhysician} from "@/app/lib/fetch";
 
 export default async function PhysicianCards() {
 
