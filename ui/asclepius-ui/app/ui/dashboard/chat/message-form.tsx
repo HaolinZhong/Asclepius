@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { useMessage } from "@/app/ui/dashboard/chat/chat-context";
 import { Button, TextArea } from '@apideck/components'
+import {PaperAirplaneIcon} from "@heroicons/react/24/outline";
+import {ButtonBase} from "@mui/material";
 
 export default function MessageForm() {
     const [content, setContent] = useState('')
@@ -10,7 +12,9 @@ export default function MessageForm() {
 
     const handleSubmit = async (e) => {
         e?.preventDefault()
-        addMessage(content)
+        if (content.trim() !== '') {
+            addMessage(content)
+        }
         setContent('')
     }
 
@@ -33,9 +37,9 @@ export default function MessageForm() {
                     onChange={(e) => setContent(e.target.value)}
                 />
                 <div className="absolute right-8 bottom-10">
-                    <Button className="" type="submit" size="small">
-                        Send
-                    </Button>
+                    <ButtonBase className="rounded-md shadow-lg outline" type="submit" size="small">
+                        <PaperAirplaneIcon className="w-6 rounded-md"/>
+                    </ButtonBase>
                 </div>
             </div>
         </form>

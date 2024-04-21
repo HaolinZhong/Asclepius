@@ -32,10 +32,20 @@ export const ChatContextProvider = ({ children }: { children: ReactNode }) => {
     const [isStreaming, setIsStreaming] = useState<boolean>(false);
 
     useEffect(() => {
-        const initializeChat = () => {
+        const initializeChat = async () => {
+            const requestMessage: ChatMessage = {
+                type: 'message',
+                role: ChatMessageRoleEnum.User,
+                author: 'user',
+                content: `This is a new user, so you can forget about the information about the previous user.`
+            };
+            await sendMessage(requestMessage);
+
             const welcomeMessage: ChatMessage = {
+                type: 'message',
                 role: ChatMessageRoleEnum.Assistant,
-                content: `Hi, I'm  Asclepius, your virtual clinic receptionist. Please describe your symptom and I will help you to find 
+                author: 'assistant',
+                content: `Hi, I'm Asclepius, your virtual clinic receptionist. Please describe your symptom and I will help you to find 
                  a suitable physician and make an appointment for you.`,
             }
             setMessages([welcomeMessage])
@@ -51,19 +61,15 @@ export const ChatContextProvider = ({ children }: { children: ReactNode }) => {
     const addMessage = async (content: string) => {
         try {
             const requestMessage: ChatMessage = {
+                type: 'message',
                 role: ChatMessageRoleEnum.User,
                 author: 'user',
                 content: content
             };
             setMessages([...messages, requestMessage]);
-            const responseContent = await sendMessage(requestMessage)
-            const responseMessage: ChatMessage = {
-                role: ChatMessageRoleEnum.Assistant,
-                author: ChatMessageRoleEnum.Assistant,
-                content: responseContent
-            }
-            setMessages([...messages, requestMessage, responseMessage])
             setIsStreaming(true);
+            const responseMessage = await sendMessage(requestMessage)
+            setMessages([...messages, requestMessage, responseMessage])
         } catch (error) {
             // addToToast
         } finally {

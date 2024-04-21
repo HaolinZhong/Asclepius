@@ -1,31 +1,41 @@
 package com.asclepius.asclepiusservice.controller;
 
+import com.asclepius.asclepiusservice.AIModel.ChatContextMonitor;
 import com.asclepius.asclepiusservice.model.SimpleMessage;
-import com.asclepius.asclepiusservice.service.ReceptionistService;
+import com.asclepius.asclepiusservice.AIModel.Receptionist;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import reactor.core.publisher.Flux;
 
 @RestController
-//@AllArgsConstructor
+@AllArgsConstructor
 public class ReceptionistController {
 
-    @Autowired
-    @Qualifier("receptionistModel")
-    private ReceptionistService receptionistService;
+    private Receptionist receptionist;
 
-//    @PostMapping(value = "/streamingChat", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-//    public Flux<SimpleMessage> streamingChat(@RequestBody SimpleMessage simpleMessage) {
-//        return receptionistService.streamingChat(simpleMessage.getContent()).log();
-//    }
+    private ChatContextMonitor chatContextMonitor;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReceptionistController.class);
 
     @PostMapping(value = "/chat")
-    public String chat(@RequestBody SimpleMessage simpleMessage) {
-        return receptionistService.chat(simpleMessage.getContent()).getContent();
+    public SimpleMessage chat(@RequestBody SimpleMessage simpleMessage) {
+
+        try {
+            SimpleMessage response = receptionist.chat(simpleMessage.getContent());
+
+            if (chatContextMonitor.isAboutPhysician(response.getContent())) {
+                return SimpleMessage.physicianDataMessage(response.getContent(), receptionist.sendJsonPhysicianInfo());
+            }
+            return response;
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            return SimpleMessage.assistantMessage("Oops...Something's wrong about the sever. Try to check back later...");
+        }
+
     }
 }

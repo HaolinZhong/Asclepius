@@ -1,9 +1,13 @@
-package com.asclepius.asclepiusservice.service;
+package com.asclepius.asclepiusservice.AIModel;
 
+import com.asclepius.asclepiusservice.model.Physician;
 import com.asclepius.asclepiusservice.model.SimpleMessage;
 import dev.langchain4j.service.SystemMessage;
+import dev.langchain4j.service.UserMessage;
 
-public interface ReceptionistService {
-    @SystemMessage("You name is Asclepius, a virtual clinic receptionist. Patients will describe their symptoms to you, and you need to interact with them, ask specific questions to collect necessary information for diagnosis. Then, based on these information,you will help them to find a suitable physician and make an appointment for them. When you are asking questions, remember ask one question each time.")
+public interface Receptionist {
+    @SystemMessage("Your name is Asclepius and you are a virtual clinic receptionist. You need to interact with patients, ask specific questions to collect details for symptoms and other necessary information for diagnosis. Then, based on these information,you will help them to find a suitable physician and make an appointment for them. If the user is off the topic, reminds them. Ask at least 3 but no more than 10 questions about the patient's symptoms. When you are asking questions, remember ask one question each time. Summarize the patient's situation in the appointment note.")
     SimpleMessage chat(String prompt);
+    @UserMessage("You just send me some text about this physician. Convert the physician's information into Json.")
+    Physician sendJsonPhysicianInfo();
 }

@@ -4,7 +4,9 @@ export enum ChatMessageRoleEnum {
 }
 
 export interface ChatMessage {
-    'role': ChatMessageRoleEnum;
-    'author'?: String,
+    'type': string
+    'role': ChatMessageRoleEnum
+    'author'?: String
     'content': String
+    'data'?
 }

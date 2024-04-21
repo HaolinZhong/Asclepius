@@ -10,10 +10,16 @@ import lombok.NoArgsConstructor;
 public class SimpleMessage {
 
     public static SimpleMessage assistantMessage(String s) {
-        return new SimpleMessage("assistant", "assistant", s);
+        return new SimpleMessage("message", "assistant", "assistant", s, null);
     }
 
+    public static SimpleMessage physicianDataMessage(String response, Physician physician) {
+        return new SimpleMessage("data", "assistant", "assistant", response, physician);
+    }
+
+    private String type;
     private String role;
     private String author;
     private String content;
+    private Object data;
 }

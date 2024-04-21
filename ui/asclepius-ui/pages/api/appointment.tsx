@@ -7,7 +7,8 @@ const apiBlockingInstance = axios.create({
     responseType: 'json'
 })
 
-export default async function physicianHandler(req: NextApiRequest, res: NextApiResponse) {
-    const response = await apiBlockingInstance.get('/physician');
+export default async function appointmentHandler(req: NextApiRequest, res: NextApiResponse) {
+    const message = req.body;
+    const response = await apiBlockingInstance.get('/appointment');
     res.status(200).json(response.data);
 }

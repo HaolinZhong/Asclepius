@@ -1,11 +1,9 @@
-package com.asclepius.asclepiusservice.service;
+package com.asclepius.asclepiusservice.AIModel;
 
-import dev.langchain4j.service.SystemMessage;
 import dev.langchain4j.service.UserMessage;
 
 public interface ChatContextMonitor {
 
-    @SystemMessage("You are a conversation context monitor. You task is to ")
-    @UserMessage("Is the following text within the specified context? text: {{it}}")
-    boolean isWithinContext(String text);
+    @UserMessage("Is this text talking about a specific physician? text: {{it}}")
+    boolean isAboutPhysician(String text);
 }
